@@ -349,3 +349,68 @@ document.addEventListener('DOMContentLoaded', function () {
         openModal(modalId);
     }
 });
+
+/* ===========================================================
+   Mobile off-canvas sidebar (tablet/phone) — separate from the
+   desktop icon-only collapse. Toggled by the hamburger button
+   that only renders (via CSS) at widths <= 992px.
+=========================================================== */
+function toggleMobileSidebar() {
+    var sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+    var backdrop = document.getElementById('sidebarBackdrop');
+    var open = sidebar.classList.toggle('mobile-open');
+    if (backdrop) backdrop.classList.toggle('open', open);
+}
+
+function closeMobileSidebar() {
+    var sidebar = document.querySelector('.sidebar');
+    var backdrop = document.getElementById('sidebarBackdrop');
+    if (sidebar) sidebar.classList.remove('mobile-open');
+    if (backdrop) backdrop.classList.remove('open');
+}
+
+// Tapping a nav link on mobile should close the drawer instead of leaving it
+// open over the newly-loaded page.
+document.addEventListener('click', function (e) {
+    if (window.innerWidth > 992) return;
+    var link = e.target.closest('.sidebar a.nav-item');
+    if (link && !link.classList.contains('dropdown-toggle')) closeMobileSidebar();
+});
+
+/* ===========================================================
+   Notification bell dropdown (header) — shared dummy feed,
+   mirrors the top of Log Aktivitas for continuity.
+=========================================================== */
+var RECENT_NOTIFICATIONS = [
+    { bg: 'bg-danger-light', icon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>', text: 'Stok <strong>Aqua Botol 600ml</strong> mencapai batas kritis (5 karton)', time: '10 menit lalu' },
+    { bg: 'bg-info-light', icon: '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>', text: 'PO <strong>PO-0092</strong> ke PT Danone Aqua berhasil dibuat', time: '25 menit lalu' },
+    { bg: 'bg-success-light', icon: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>', text: 'Pelanggan baru terdaftar: <strong>Ahmad Fauzi</strong>', time: '1 jam lalu' },
+    { bg: 'bg-warning-light', icon: '<rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/>', text: 'Biaya listrik <strong>Rp 850.000</strong> dicatat oleh Rina Marlina', time: '2 jam lalu' },
+    { bg: 'bg-primary-light', icon: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>', text: 'Promo <strong>Diskon Akhir Bulan</strong> akan berakhir dalam 3 hari', time: '3 jam lalu' }
+];
+
+function renderNotifDropdown() {
+    var list = document.getElementById('notifList');
+    if (!list || list.getAttribute('data-rendered')) return;
+    list.innerHTML = RECENT_NOTIFICATIONS.map(function (n) {
+        return '<div class="activity-item"><div class="activity-icon ' + n.bg + '">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' + n.icon + '</svg></div>' +
+            '<div><div class="activity-text">' + n.text + '</div><div class="activity-time">' + n.time + '</div></div></div>';
+    }).join('');
+    list.setAttribute('data-rendered', '1');
+}
+
+function toggleNotifDropdown(event) {
+    event.stopPropagation();
+    var dd = document.getElementById('notifDropdown');
+    if (!dd) return;
+    renderNotifDropdown();
+    dd.classList.toggle('open');
+}
+
+document.addEventListener('click', function (e) {
+    var dd = document.getElementById('notifDropdown');
+    if (!dd || !dd.classList.contains('open')) return;
+    if (!e.target.closest('.notif-bell-wrap')) dd.classList.remove('open');
+});

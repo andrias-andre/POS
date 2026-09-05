@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Laporan Penjualan - Minimarket ERP</title><link rel="stylesheet" href="css/style.css"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kartu Stok per Barang - Minimarket ERP</title><link rel="stylesheet" href="css/style.css"></head>
 <body>
 
     <aside class="sidebar">
@@ -68,11 +68,11 @@
                     <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(180deg);"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
                 <div class="sub-menu" id="reportSubMenu" style="display: block;">
-                    <a href="report_penjualan.html" class="nav-item sub-item active">Laporan Penjualan</a>
+                    <a href="report_penjualan.html" class="nav-item sub-item ">Laporan Penjualan</a>
                     <a href="report_labarugi.html" class="nav-item sub-item ">Laporan Laba Rugi</a>
                     <a href="accounting.html" class="nav-item sub-item ">Buku Besar</a>
                     <a href="report_stok.html" class="nav-item sub-item ">Laporan Stok & Persediaan</a>
-                    <a href="kartu_stok.html" class="nav-item sub-item ">Kartu Stok per Barang</a>
+                    <a href="kartu_stok.html" class="nav-item sub-item active">Kartu Stok per Barang</a>
                     <a href="report_slowmoving.html" class="nav-item sub-item ">Laporan Produk Slow Moving</a>
                     <a href="report_pembelian.html" class="nav-item sub-item ">Laporan Pembelian</a>
                     <a href="report_kas.html" class="nav-item sub-item ">Laporan Kas & Keuangan</a>
@@ -99,7 +99,7 @@
     <div class="main-content">
 
     <header>
-        <div class="header-title"><button type="button" class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Buka menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><h1>Laporan Penjualan</h1></div>
+        <div class="header-title"><button type="button" class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Buka menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><h1>Kartu Stok per Barang</h1></div>
         <div class="header-actions">
             <div class="notif-bell-wrap">
                 <button type="button" class="notif-bell-btn" onclick="toggleNotifDropdown(event)" aria-label="Notifikasi" title="Notifikasi">
@@ -112,40 +112,53 @@
                     <div class="notif-dropdown-footer"><a href="activity_log.html">Lihat Semua Log Aktivitas &rarr;</a></div>
                 </div>
             </div>
-            <a href="pos.html" class="btn btn-primary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg> Buka Kasir (POS)</a>
+            
         </div>
     </header>
 
         <div class="page-container">
 
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-header"><span class="stat-title">Omzet Periode Ini</span></div><div class="stat-value">Rp 58.240.000</div><div class="stat-footer text-success"><span>&uarr; 12%</span> vs periode lalu</div></div>
-                <div class="stat-card"><div class="stat-header"><span class="stat-title">Total Struk</span></div><div class="stat-value">942 Struk</div></div>
-                <div class="stat-card"><div class="stat-header"><span class="stat-title">Rata-rata / Struk</span></div><div class="stat-value">Rp 61.800</div></div>
-            </div>
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title">Laporan Penjualan Harian</span>
-                    <a href="#" class="btn btn-outline btn-sm" onclick="event.preventDefault(); demoAction('Mengunduh laporan penjualan (demo).')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export Excel</a>
+                    <span class="card-title">Pilih Produk</span>
                 </div>
-                
-                <div class="card-body" style="padding: 16px 20px 0; display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
-                    <div class="form-group" style="margin-bottom:0;"><label>Dari Tanggal</label><input type="date" class="form-control" value="2026-08-26" style="width:170px;"></div>
-                    <div class="form-group" style="margin-bottom:0;"><label>Sampai Tanggal</label><input type="date" class="form-control" value="2026-09-02" style="width:170px;"></div>
-                    <button class="btn btn-primary btn-sm" onclick="demoAction('Laporan diperbarui sesuai rentang tanggal (demo).')">Terapkan</button>
+                <div class="card-body" style="padding-bottom: 4px;">
+                    <div class="form-group" style="max-width:420px; margin-bottom:0;">
+                        <select id="productSelect" class="form-control" onchange="renderStockCard()">
+                            <!-- filled by JS -->
+                        </select>
+                    </div>
                 </div>
+            </div>
 
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-title">Stok Saat Ini</span></div>
+                    <div class="stat-value" id="scStokAkhir">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-title">Nilai Stok Saat Ini</span></div>
+                    <div class="stat-value" id="scNilaiStok">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-title">Rata-rata Terjual/Hari<span class="info-tip" data-tip="Dihitung dari total unit keluar (penjualan) dibagi jumlah hari pada riwayat kartu stok ini."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></span></div>
+                    <div class="stat-value" id="scRataRata">-</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Riwayat Keluar-Masuk Stok &mdash; <span id="scProductName"></span></span>
+                    <a href="#" class="btn btn-outline btn-sm" onclick="event.preventDefault(); demoAction('Mengunduh kartu stok (demo).')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export Excel
+                    </a>
+                </div>
                 <div class="card-body" style="padding: 0;">
                     <table style="width:100%;">
-                        <thead><tr><th>Tanggal</th><th>Jumlah Struk</th><th>Omzet</th><th>Metode Terbanyak</th></tr></thead>
-                        <tbody>
-                            <tr><td>02 Sep 2026</td><td>142</td><td>Rp 8.450.000</td><td>QRIS</td></tr>
-                            <tr><td>01 Sep 2026</td><td>138</td><td>Rp 7.980.000</td><td>Tunai</td></tr>
-                            <tr><td>31 Agu 2026</td><td>155</td><td>Rp 9.120.000</td><td>QRIS</td></tr>
-                            <tr><td>30 Agu 2026</td><td>119</td><td>Rp 6.740.000</td><td>Tunai</td></tr>
-                            <tr><td>29 Agu 2026</td><td>127</td><td>Rp 7.315.000</td><td>Debit</td></tr>
-                            <tr><td>28 Agu 2026</td><td>131</td><td>Rp 7.560.000</td><td>QRIS</td></tr>
-                            <tr><td>27 Agu 2026</td><td>130</td><td>Rp 6.975.000</td><td>Tunai</td></tr>
+                        <thead><tr><th>Tanggal</th><th>Jenis Transaksi</th><th>No. Referensi</th><th>Masuk</th><th>Keluar</th><th>Saldo Stok</th></tr></thead>
+                        <tbody id="tblKartuStok">
+                            <!-- filled by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -161,6 +174,111 @@
 
 
 <script src="js/demo.js"></script>
+
+<script>
+    var STOCK_LEDGER = {
+        '89686010': { name: 'Indomie Goreng Spesial 85g', unit: 'dus', price: 3100, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 100, keluar: 0 },
+            { date: '10 Agu 2026', type: 'Pembelian (PO)', ref: 'PO-0084', masuk: 80, keluar: 0 },
+            { date: '15 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 65 },
+            { date: '20 Agu 2026', type: 'Retur Pelanggan', ref: 'RTJ-0009', masuk: 2, keluar: 0 },
+            { date: '31 Agu 2026', type: 'Stok Opname', ref: 'Opname Agustus', masuk: 0, keluar: 3 },
+            { date: '02 Sep 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 14 }
+        ]},
+        '89927611': { name: 'Aqua Air Mineral Botol 600ml', unit: 'karton', price: 3500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 15, keluar: 0 },
+            { date: '08 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 7 },
+            { date: '30 Agu 2026', type: 'Pembelian (PO)', ref: 'PO-0091', masuk: 4, keluar: 0 },
+            { date: '31 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 5 },
+            { date: '02 Sep 2026', type: 'Stok Opname', ref: 'Opname September', masuk: 0, keluar: 2 }
+        ]},
+        '89912345': { name: 'Chitato Sapi Panggang 68g', unit: 'pcs', price: 11500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 40, keluar: 0 },
+            { date: '18 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 8 },
+            { date: '20 Agu 2026', type: 'Pembelian (PO)', ref: 'PO-0088', masuk: 24, keluar: 0 },
+            { date: '25 Agu 2026', type: 'Retur Pembelian', ref: 'RTB-0004', masuk: 0, keluar: 24 },
+            { date: '01 Sep 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 8 }
+        ]},
+        '89988776': { name: 'Bimoli Minyak Goreng Pouch 2L', unit: 'pcs', price: 38500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 20, keluar: 0 },
+            { date: '08 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 5 },
+            { date: '15 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 3 }
+        ]},
+        '89955443': { name: 'Beras Maknyuss Premium 5Kg', unit: 'pcs', price: 72000, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 18, keluar: 0 },
+            { date: '28 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 3 }
+        ]},
+        '89944332': { name: 'Susu Ultra Full Cream 1L', unit: 'pcs', price: 18500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 24, keluar: 0 },
+            { date: '12 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 6 },
+            { date: '20 Agu 2026', type: 'Pembelian (PO)', ref: 'PO-0089', masuk: 12, keluar: 0 }
+        ]},
+        '89922110': { name: 'Pepsodent Pencegah Gigi Berlubang 190g', unit: 'pcs', price: 14500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 40, keluar: 0 },
+            { date: '22 Jul 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 2 }
+        ]},
+        '89999887': { name: 'Kopi Kapal Api Special Mix 10s', unit: 'pcs', price: 13000, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 53, keluar: 0 },
+            { date: '15 Jul 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 1 }
+        ]},
+        '89945210': { name: 'Sariroti Tawar Spesial', unit: 'pcs', price: 14500, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 68, keluar: 0 },
+            { date: '20 Agu 2026', type: 'Retur Pelanggan', ref: 'RTJ-0012', masuk: 0, keluar: 1 },
+            { date: '02 Sep 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 2 }
+        ]},
+        '89933012': { name: 'Rinso Anti Noda 800g', unit: 'pcs', price: 19900, entries: [
+            { date: '01 Agu 2026', type: 'Stok Awal', ref: '-', masuk: 45, keluar: 0 },
+            { date: '29 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 1 },
+            { date: '29 Agu 2026', type: 'Retur Penjualan', ref: 'RTJ-0011', masuk: 0, keluar: 0 },
+            { date: '03 Agu 2026', type: 'Penjualan', ref: 'Rekap Kasir', masuk: 0, keluar: 4 }
+        ]}
+    };
+
+    function formatRp(n) { return 'Rp ' + Math.round(n).toLocaleString('id-ID'); }
+
+    function populateProductSelect() {
+        var select = document.getElementById('productSelect');
+        Object.keys(STOCK_LEDGER).forEach(function (sku) {
+            var opt = document.createElement('option');
+            opt.value = sku;
+            opt.textContent = STOCK_LEDGER[sku].name + ' (' + sku + ')';
+            select.appendChild(opt);
+        });
+    }
+
+    function renderStockCard() {
+        var sku = document.getElementById('productSelect').value;
+        var product = STOCK_LEDGER[sku];
+        if (!product) return;
+
+        document.getElementById('scProductName').textContent = product.name;
+
+        var tbody = document.getElementById('tblKartuStok');
+        tbody.innerHTML = '';
+        var saldo = 0, totalKeluar = 0;
+        product.entries.forEach(function (e) {
+            saldo += e.masuk - e.keluar;
+            totalKeluar += e.keluar;
+            var row = document.createElement('tr');
+            row.innerHTML =
+                '<td>' + e.date + '</td>' +
+                '<td>' + e.type + '</td>' +
+                '<td><code>' + e.ref + '</code></td>' +
+                '<td>' + (e.masuk > 0 ? '<span class="text-success">+' + e.masuk + '</span>' : '-') + '</td>' +
+                '<td>' + (e.keluar > 0 ? '<span class="text-danger">-' + e.keluar + '</span>' : '-') + '</td>' +
+                '<td><strong>' + saldo + ' ' + product.unit + '</strong></td>';
+            tbody.appendChild(row);
+        });
+
+        document.getElementById('scStokAkhir').textContent = saldo + ' ' + product.unit;
+        document.getElementById('scNilaiStok').textContent = formatRp(saldo * product.price);
+        var days = product.entries.length > 0 ? 33 : 1; // approx span of the demo period
+        document.getElementById('scRataRata').textContent = (totalKeluar / days).toFixed(1) + ' ' + product.unit + '/hari';
+    }
+
+    populateProductSelect();
+    renderStockCard();
+</script>
 
 </body>
 </html>

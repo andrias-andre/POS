@@ -130,6 +130,11 @@ header { height: 65px; background-color: var(--bg-card); border-bottom: 1px soli
 .badge-dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; background-color: var(--danger); border-radius: 50%; }
 
 .btn { padding: 8px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; text-decoration: none; justify-content: center; }
+/* Safety net: any icon svg inside a button/link that forgot an explicit
+   width/height attribute would otherwise render at the browser's default
+   300x150 replaced-element size. This only touches svgs with NO width
+   attribute set, so icons that already size themselves are untouched. */
+.btn svg:not([width]), .btn-icon svg:not([width]), .customer-tag-btn svg:not([width]) { width: 16px; height: 16px; flex-shrink: 0; }
 .btn-primary { background-color: var(--primary); color: #ffffff; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3); }
 .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
 .btn-outline { background-color: transparent; border-color: var(--border-color); color: var(--text-main); }
@@ -375,3 +380,117 @@ tr:hover { background-color: #f1f5f9; }
     .barcode-label { border: 1px solid #999; break-inside: avoid; }
 }
 
+
+/* ===========================================================
+   Notification bell (header)
+=========================================================== */
+.header-title { display: flex; align-items: center; gap: 12px; }
+.mobile-menu-btn {
+    display: none; width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);
+    background: var(--bg-card); color: var(--text-main); align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mobile-menu-btn svg { width: 19px; height: 19px; }
+
+.notif-bell-wrap { position: relative; }
+.notif-bell-btn {
+    position: relative; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-color);
+    background: var(--bg-card); color: var(--text-muted); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+}
+.notif-bell-btn:hover { background: var(--bg-main); color: var(--text-main); }
+.notif-bell-btn svg { width: 18px; height: 18px; }
+.notif-badge {
+    position: absolute; top: -2px; right: -2px; background: var(--danger); color: #fff; font-size: 10px; font-weight: 700;
+    min-width: 16px; height: 16px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    padding: 0 3px; border: 2px solid var(--bg-card);
+}
+.notif-dropdown {
+    position: absolute; top: 48px; right: 0; width: 340px; max-width: 88vw; background: var(--bg-card);
+    border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+    z-index: 500; display: none; overflow: hidden;
+}
+.notif-dropdown.open { display: block; }
+.notif-dropdown-header { padding: 14px 16px; border-bottom: 1px solid var(--border-color); font-weight: 700; font-size: 14px; }
+.notif-dropdown-list { max-height: 320px; overflow-y: auto; }
+.notif-dropdown-list .activity-item { padding: 12px 16px; }
+.notif-dropdown-list .activity-text { font-size: 12.5px; }
+.notif-dropdown-footer { padding: 10px 16px; text-align: center; border-top: 1px solid var(--border-color); }
+.notif-dropdown-footer a { font-size: 12.5px; font-weight: 700; color: var(--primary); }
+
+/* ===========================================================
+   App footer
+=========================================================== */
+.app-footer { padding: 16px 25px; text-align: center; font-size: 11.5px; color: var(--text-muted); border-top: 1px solid var(--border-color); background: var(--bg-card); }
+.app-footer strong { color: var(--text-main); }
+
+/* ===========================================================
+   Info tooltip (pure CSS, hover-based)
+=========================================================== */
+.info-tip { position: relative; display: inline-flex; margin-left: 5px; color: var(--text-muted); cursor: help; vertical-align: middle; }
+.info-tip svg { width: 14px; height: 14px; }
+.info-tip:hover { color: var(--primary); }
+.info-tip:hover::after {
+    content: attr(data-tip); position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%);
+    background: #1e293b; color: #fff; padding: 9px 11px; border-radius: 6px; font-size: 11.5px; font-weight: 500;
+    white-space: normal; width: 220px; box-shadow: var(--shadow-md); z-index: 500; line-height: 1.4; text-align: left;
+}
+.info-tip:hover::before {
+    content: ''; position: absolute; bottom: 122%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #1e293b; z-index: 500;
+}
+
+/* ===========================================================
+   Responsive layout — tablet & mobile
+=========================================================== */
+.sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.5); z-index: 95; }
+.sidebar-backdrop.open { display: block; }
+
+/* Let tables scroll horizontally on narrow screens instead of squeezing */
+.card-body { overflow-x: auto; min-width: 0; }
+.grid-2 > .card, .stats-grid > .stat-card { min-width: 0; }
+
+@media (max-width: 992px) {
+    .mobile-menu-btn { display: flex; }
+    .sidebar { transform: translateX(-100%); width: 260px !important; }
+    .sidebar.mobile-open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+    /* Icon-only collapse is a desktop concept; force full labels whenever the
+       off-canvas drawer is used, so mobile always shows a normal readable menu */
+    .sidebar.collapsed .brand-text,
+    .sidebar.collapsed .app-switcher,
+    .sidebar.collapsed .nav-section,
+    .sidebar.collapsed .nav-search,
+    .sidebar.collapsed .nav-item span,
+    .sidebar.collapsed .chevron,
+    .sidebar.collapsed .user-info { display: initial !important; }
+    .sidebar.collapsed .nav-item:not(.sub-item) { justify-content: flex-start; padding: 11px 14px; }
+    .sidebar.collapsed .brand { flex-direction: row; padding: 20px; }
+    .sidebar-toggle-btn { display: none; }
+    .sidebar ~ .main-content { margin-left: 0 !important; }
+
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .quick-actions { grid-template-columns: repeat(2, 1fr); }
+    .pos-container { grid-template-columns: 1fr; height: auto; }
+    .pos-cart-area { max-height: none; }
+}
+
+@media (max-width: 768px) {
+    /* Only force a horizontal-scroll floor for tables on genuinely small
+       screens — on desktop, tables should size naturally and never
+       widen a two-column grid the way an unconditional min-width would. */
+    .card-body table { min-width: 620px; }
+}
+
+@media (max-width: 640px) {
+    header { padding: 0 14px; flex-wrap: wrap; height: auto; min-height: 65px; gap: 10px 0; }
+    .header-title h1 { font-size: 15px; }
+    .header-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; padding: 8px 0; }
+    .header-actions .btn-sm, .header-actions .btn { padding: 7px 10px; font-size: 12px; }
+    .page-container { padding: 14px !important; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .quick-actions { grid-template-columns: 1fr; }
+    .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .modal { width: 92vw !important; max-height: 85vh; overflow-y: auto; }
+    .notif-dropdown { width: 82vw; right: -50px; }
+    .card-body table { min-width: 520px; }
+}

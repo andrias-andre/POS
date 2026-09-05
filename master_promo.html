@@ -44,30 +44,42 @@
                     <a href="master_promo.html" class="nav-item sub-item active">Master Promo & Diskon</a>
                 </div>
             </div>
-            <a href="sales.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span>Riwayat Penjualan</span></a>
-            <a href="retur_penjualan.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span>Retur Penjualan</span></a>
-            <a href="purchases.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Pembelian (PO)</span></a>
-            <a href="retur_pembelian.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Retur Pembelian</span></a>
-            <a href="inventory.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Manajemen Stok</span></a>
-            <a href="expenses.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>Biaya Ops. & Kas</span></a>
-            <a href="accounting.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buku Besar</span></a>
+            <div class="nav-section">Transaksi</div>
+            <div class="dropdown">
+                <a href="#" class="nav-item dropdown-toggle " onclick="toggleSubMenu(event, 'transaksiSubMenu')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                    <span>Transaksi</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(0deg);"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="sub-menu" id="transaksiSubMenu" style="display: none;">
+                    <a href="sales.html" class="nav-item sub-item ">Riwayat Penjualan</a>
+                    <a href="retur_penjualan.html" class="nav-item sub-item ">Retur Penjualan</a>
+                    <a href="purchases.html" class="nav-item sub-item ">Pembelian (PO)</a>
+                    <a href="retur_pembelian.html" class="nav-item sub-item ">Retur Pembelian</a>
+                    <a href="inventory.html" class="nav-item sub-item ">Manajemen Stok</a>
+                    <a href="expenses.html" class="nav-item sub-item ">Biaya Ops. & Kas</a>
+                </div>
+            </div>
             <div class="nav-section">Laporan & Analitik</div>
             <div class="dropdown">
                 <a href="#" class="nav-item dropdown-toggle " onclick="toggleSubMenu(event, 'reportSubMenu')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                     <span>Laporan (Report)</span>
                     <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(0deg);"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
                 <div class="sub-menu" id="reportSubMenu" style="display: none;">
                     <a href="report_penjualan.html" class="nav-item sub-item ">Laporan Penjualan</a>
                     <a href="report_labarugi.html" class="nav-item sub-item ">Laporan Laba Rugi</a>
+                    <a href="accounting.html" class="nav-item sub-item ">Buku Besar</a>
                     <a href="report_stok.html" class="nav-item sub-item ">Laporan Stok & Persediaan</a>
+                    <a href="kartu_stok.html" class="nav-item sub-item ">Kartu Stok per Barang</a>
                     <a href="report_slowmoving.html" class="nav-item sub-item ">Laporan Produk Slow Moving</a>
                     <a href="report_pembelian.html" class="nav-item sub-item ">Laporan Pembelian</a>
                     <a href="report_kas.html" class="nav-item sub-item ">Laporan Kas & Keuangan</a>
                 </div>
             </div>
-            <a href="activity_log.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Log Aktivitas</span></a>
+            <div class="nav-section">Sistem</div>
+            <a href="activity_log.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Log Aktivitas</span></a>
             <a href="settings.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Pengaturan Toko</span></a>
             <div class="nav-empty-state">Menu tidak ditemukan.<br>Coba kata kunci lain.</div>
         </div>
@@ -82,12 +94,24 @@
             </a>
         </div>
     </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
 
     <div class="main-content">
 
     <header>
-        <div class="header-title"><h1>Master Promo & Diskon</h1></div>
+        <div class="header-title"><button type="button" class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Buka menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><h1>Master Promo & Diskon</h1></div>
         <div class="header-actions">
+            <div class="notif-bell-wrap">
+                <button type="button" class="notif-bell-btn" onclick="toggleNotifDropdown(event)" aria-label="Notifikasi" title="Notifikasi">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="notif-badge">5</span>
+                </button>
+                <div class="notif-dropdown" id="notifDropdown">
+                    <div class="notif-dropdown-header">Notifikasi Terbaru</div>
+                    <div class="notif-dropdown-list" id="notifList"></div>
+                    <div class="notif-dropdown-footer"><a href="activity_log.html">Lihat Semua Log Aktivitas &rarr;</a></div>
+                </div>
+            </div>
             <a href="pos.html" class="btn btn-primary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg> Buka Kasir (POS)</a>
         </div>
     </header>
@@ -125,6 +149,10 @@
             </div>
 
         </div>
+        <footer class="app-footer">
+            <strong>MiniMart ERP</strong> v1.0 &mdash; Dashboard Demo untuk keperluan presentasi klien.
+            &copy; 2026 MiniMart ERP. Seluruh hak cipta dilindungi.
+        </footer>
     </div>
 
 

@@ -11,10 +11,10 @@
     <div class="main-content full-width">
         <header>
             <div class="header-title" style="display:flex; align-items:center; gap:15px;">
-                <a href="index.html" class="btn-icon" title="Kembali ke Dashboard ERP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a>
+                <a href="dashboard.html" class="btn-icon" title="Kembali ke Dashboard ERP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a>
                 <div>
                     <h1 style="font-size: 18px;">Kasir Minimarket Utama</h1>
-                    <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Shift: Pagi (08:00 - 15:00) | Kasir: Budi Santoso</div>
+                    <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px;">Shift: Pagi (08:00 - 15:00) | Kasir: Andi Prasetyo</div>
                 </div>
             </div>
             <div class="header-actions">
@@ -29,9 +29,8 @@
                         <div class="notif-dropdown-footer"><a href="activity_log.html">Lihat Semua Log Aktivitas &rarr;</a></div>
                     </div>
                 </div>
-                <button class="btn btn-outline btn-sm" onclick="demoAction('Laci kasir terbuka (demo).')">Buka Laci Kasir (F7)</button>
-                <a href="sales.html" class="btn btn-outline btn-sm">Riwayat (F8)</a>
-                <a href="index.html" class="btn btn-primary btn-sm">Tutup Kasir</a>
+                <a href="sales.html" class="btn btn-outline btn-sm">Riwayat</a>
+                <a href="dashboard.html" class="btn btn-primary btn-sm">Tutup Kasir</a>
             </div>
         </header>
         
@@ -44,7 +43,7 @@
                     <div class="barcode-scanner-box">
                         <div class="search-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
-                            <input type="text" id="scanInput" placeholder="Scan Barcode atau Ketik Nama Produk (F2)..." autofocus oninput="applyProductFilters()" onkeydown="if(event.key==='Enter'){ event.preventDefault(); handleScan(); }">
+                            <input type="text" id="scanInput" placeholder="Scan Barcode atau Ketik Nama Produk ..." autofocus oninput="applyProductFilters()" onkeydown="if(event.key==='Enter'){ event.preventDefault(); handleScan(); }">
                         </div>
                         <button class="btn btn-primary" style="padding: 12px 20px;" onclick="handleScan()">Cari</button>
                     </div>
@@ -151,7 +150,7 @@
                         <div class="action-buttons">
                             <button class="btn btn-outline" style="grid-column: 1;" onclick="holdTransaction()">Simpan (Hold)</button>
                             <button class="btn btn-outline" style="grid-column: 2;" onclick="manualDiscount()">Diskon Manual</button>
-                            <button class="btn-pay" onclick="openCheckoutModal()">BAYAR SEKARANG (F9)</button>
+                            <button class="btn-pay" onclick="openCheckoutModal()">BAYAR SEKARANG</button>
                         </div>
                     </div>
                 </div>
@@ -217,7 +216,7 @@
                 <table style="width:100%;">
                     <tbody id="memberList">
                         <tr><td><strong>Sari Wulandari</strong><br><span style="font-size:11px; color:var(--text-muted);">0812-1122-3344 &middot; 245 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Sari Wulandari')">Pilih</button></td></tr>
-                        <tr><td><strong>Budi Santoso</strong><br><span style="font-size:11px; color:var(--text-muted);">0813-4455-6677 &middot; 187 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Budi Santoso')">Pilih</button></td></tr>
+                        <tr><td><strong>Iwan Wijaya</strong><br><span style="font-size:11px; color:var(--text-muted);">0813-4455-6677 &middot; 187 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Iwan Wijaya')">Pilih</button></td></tr>
                         <tr><td><strong>Dewi Anggraini</strong><br><span style="font-size:11px; color:var(--text-muted);">0821-7788-9900 &middot; 312 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Dewi Anggraini')">Pilih</button></td></tr>
                         <tr><td><strong>Ahmad Fauzi</strong><br><span style="font-size:11px; color:var(--text-muted);">0857-2233-4455 &middot; 98 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Ahmad Fauzi')">Pilih</button></td></tr>
                     </tbody>

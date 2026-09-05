@@ -1,5 +1,5 @@
 /* ===========================================================
-   demo.js — shared demo interactivity for MiniMart ERP
+   demo.js — shared demo interactivity for MiniMart
    Client-side only (dummy data). Provides toast notifications,
    modal open/close, row delete, and simple table search so every
    button/link in the demo gives a visible response.

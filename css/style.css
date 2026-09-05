@@ -482,7 +482,7 @@ tr:hover { background-color: #f1f5f9; }
 }
 
 @media (max-width: 640px) {
-    header { padding: 0 14px; flex-wrap: wrap; height: auto; min-height: 65px; gap: 10px 0; }
+    header { padding: 14px; flex-wrap: wrap; height: auto; min-height: 65px; gap: 10px 0; }
     .header-title h1 { font-size: 15px; }
     .header-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; padding: 8px 0; }
     .header-actions .btn-sm, .header-actions .btn { padding: 7px 10px; font-size: 12px; }

@@ -58,7 +58,7 @@
         min-height: 560px;
     }
 
-    /* Left panel — brand side */
+    /* Left panel — brand side (Desktop) */
     .login-aside {
         background: linear-gradient(160deg, var(--sidebar-bg) 0%, #16213d 55%, var(--primary-dark) 130%);
         color: #f8fafc;
@@ -93,7 +93,7 @@
     .brand-logo { 
         width: 40px; height: 40px; background: var(--primary); 
         border-radius: var(--radius-md); display: flex; align-items: center; 
-        justify-content: center; font-weight: bold; font-size: 20px; 
+        justify-content: center; font-weight: bold; font-size: 20px; color: white;
     }
     .login-aside .brand-title { font-size: 19px; font-weight: 700; }
 
@@ -106,22 +106,28 @@
     .login-aside-stat-value { font-size: 20px; font-weight: 800; }
     .login-aside-stat-label { font-size: 11px; color: #94a3b8; margin-top: 2px; }
 
+    /* Mobile Brand Header (Khusus Tampilan HP) */
+    .mobile-brand-header {
+        display: none; /* Disembunyikan secara default di desktop */
+    }
+
     /* Right panel — form side */
     .login-main {
         padding: 48px 44px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
     
-    .login-heading { margin-bottom: 30px; }
-    .login-heading h1 { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
+    .login-heading { margin-bottom: 24px; }
+    .login-heading h1 { font-size: 22px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
     .login-heading p { font-size: 13px; color: var(--text-muted); }
 
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
     
     .form-control {
-        width: 100%; padding: 10px 14px; border: 1px solid var(--border-color);
+        width: 100%; padding: 11px 14px; border: 1px solid var(--border-color);
         border-radius: var(--radius-md); font-size: 14px; color: var(--text-main);
         transition: 0.2s ease; outline: none; background: #fff;
     }
@@ -145,7 +151,7 @@
     .input-with-icon .toggle-visibility svg { width: 17px; height: 17px; }
     .input-with-icon .toggle-visibility:hover { color: var(--text-main); }
 
-    .login-options { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 22px; }
+    .login-options { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 20px; }
     .remember-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); cursor: pointer; user-select: none; }
     .remember-check input { width: 15px; height: 15px; accent-color: var(--primary); cursor: pointer; }
     .forgot-link { font-size: 13px; color: var(--primary); font-weight: 600; text-decoration: none; }
@@ -157,8 +163,7 @@
     .btn-login { width: 100%; padding: 12px; font-size: 14px; }
     .btn-login svg { width: 18px; height: 18px; }
 
-    /* Perbaikan posisi footer */
-    .login-footnote { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: auto; padding-top: 24px; }
+    .login-footnote { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); }
 
     .form-error {
         display: none;
@@ -168,12 +173,58 @@
     }
     .form-error svg { width: 15px; height: 15px; flex-shrink: 0; }
 
+    /* Penyesuaian Tampilan Responsif Mobile dengan Spacing Profesional */
     @media (max-width: 760px) {
-        .login-shell { grid-template-columns: 1fr; }
+        .login-wrapper { padding: 16px; align-items: stretch; }
+        .login-shell { grid-template-columns: 1fr; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); min-height: auto; }
         .login-aside { display: none; }
-        .login-main { padding: 40px 28px; min-height: 100vh; border-radius: 0; }
-        .login-shell { border-radius: 0; box-shadow: none; min-height: 100vh; }
-        .login-wrapper { padding: 0; }
+        
+        .login-main { 
+            padding: 32px 24px; 
+        }
+
+        /* Mengatur mobile-brand-header agar berada di posisi paling atas dengan jarak aman */
+        .mobile-brand-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color); /* Garis pemisah tipis agar elegan */
+        }
+        
+        .mobile-brand-header .brand-logo-mobile {
+            width: 48px; 
+            height: 48px; 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; 
+            border-radius: 12px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 22px; 
+            font-weight: bold; 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+            margin-bottom: 10px;
+        }
+
+        .mobile-brand-header h2 { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: var(--text-main); 
+        }
+
+        .mobile-brand-header p { 
+            font-size: 12px; 
+            color: var(--text-muted); 
+            margin-top: 2px; 
+        }
+
+        .login-heading { 
+            text-align: left; /* Biar rata kiri sejajar dengan form, atau center jika diinginkan */
+            margin-bottom: 20px; 
+        }
     }
 </style>
 </head>
@@ -182,7 +233,7 @@
 <div class="login-wrapper">
     <div class="login-shell">
 
-        <!-- Left: Brand panel -->
+        <!-- Left: Brand panel (Desktop) -->
         <aside class="login-aside">
             <div class="brand">
                 <div class="brand-logo">M</div>
@@ -257,9 +308,16 @@
 
         <!-- Right: Login form -->
         <main class="login-main">
+            <!-- Brand Header khusus tampilan Mobile (Diletakkan paling atas dengan pemisah yang rapi) -->
+            <div class="mobile-brand-header">
+                <div class="brand-logo-mobile">M</div>
+                <h2>MiniMart ERP</h2>
+                <p>Retail Management System</p>
+            </div>
+
             <div class="login-heading">
-                <h1>Akses Portal MiniMart</h1>
-                <p>Gunakan Username / Email untuk masuk ke akun Anda.</p>
+                <h1>Masuk ke Akun</h1>
+                <p>Gunakan Username / Email untuk melanjutkan.</p>
             </div>
 
             <div class="form-error" id="loginError">
@@ -327,11 +385,11 @@
         errorBox.style.background = '#d1fae5';
         errorBox.style.color = '#065f46';
         errorBox.style.borderColor = '#a7f3d0';
-        errorBox.querySelector('span').textContent = 'Tautan reset kata sandi telah dikirim ke ' + email + ' (demo).';
+        errorBox.querySelector('span').textContent = 'Tautan reset kata sandi telah dikirim ke ' + email;
         errorBox.style.display = 'flex';
     }
 
-function handleLogin(event) {
+    function handleLogin(event) {
         event.preventDefault();
         var username = document.getElementById('username').value.trim();
         var password = document.getElementById('password').value.trim();
@@ -341,8 +399,10 @@ function handleLogin(event) {
             errorBox.style.display = 'none';
             
             if (username === 'kasir1@minimarket.com' && password === 'kasir123') {
+                alert('Login Kasir berhasil. Mengalihkan ke POS...');
                 window.location.href = 'pos.html';
             } else if (username === 'admin@minimarket.com' && password === 'admin123') {
+                alert('Login Admin berhasil. Mengalihkan ke Dashboard...');
                 window.location.href = 'dashboard.html';
             } else {
                 errorBox.querySelector('span').textContent = 'Username atau kata sandi salah. Silakan coba lagi.';

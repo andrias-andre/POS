@@ -479,6 +479,9 @@ tr:hover { background-color: #f1f5f9; }
        screens — on desktop, tables should size naturally and never
        widen a two-column grid the way an unconditional min-width would. */
     .card-body table { min-width: 620px; }
+    .sidebar-toggle-btn {
+        display: none !important;
+    }
 }
 
 @media (max-width: 640px) {

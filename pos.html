@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasir Minimarket - POS Flow - Minimarket ERP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-toast-position="bottom-center">
+    <div class="main-content full-width">
+        <header>
+            <div class="header-title" style="display:flex; align-items:center; gap:15px;">
+                <a href="index.html" class="btn-icon" title="Kembali ke Dashboard ERP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a>
+                <div>
+                    <h1 style="font-size: 18px;">Kasir Minimarket Utama</h1>
+                    <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Shift: Pagi (08:00 - 15:00) | Kasir: Budi Santoso</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline btn-sm" onclick="demoAction('Laci kasir terbuka (demo).')">Buka Laci Kasir (F7)</button>
+                <a href="sales.html" class="btn btn-outline btn-sm">Riwayat (F8)</a>
+                <a href="index.html" class="btn btn-primary btn-sm">Tutup Kasir</a>
+            </div>
+        </header>
+        
+        <div class="page-container" style="padding-bottom: 10px;">
+            <div class="pos-container">
+                
+                <!-- Left: Scanner & Product Grid -->
+                <div class="pos-main-area">
+                    <!-- NEW: Barcode Scanner Input -->
+                    <div class="barcode-scanner-box">
+                        <div class="search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                            <input type="text" id="scanInput" placeholder="Scan Barcode atau Ketik Nama Produk (F2)..." autofocus oninput="applyProductFilters()" onkeydown="if(event.key==='Enter'){ event.preventDefault(); handleScan(); }">
+                        </div>
+                        <button class="btn btn-primary" style="padding: 12px 20px;" onclick="handleScan()">Cari</button>
+                    </div>
+
+                    <div class="pos-categories" id="catBar">
+                        <button class="cat-btn active" onclick="filterCategory(this,'all')">Semua</button>
+                        <button class="cat-btn" onclick="filterCategory(this,'sembako')">🍜 Sembako</button>
+                        <button class="cat-btn" onclick="filterCategory(this,'minuman')">🥤 Minuman</button>
+                        <button class="cat-btn" onclick="filterCategory(this,'snack')">🍟 Snack</button>
+                        <button class="cat-btn" onclick="filterCategory(this,'harian')">🧴 Kebutuhan Harian</button>
+                    </div>
+
+                    <div class="product-grid" id="productGrid">
+                        <div class="product-card" data-cat="sembako" onclick="addToCart('89686010','Indomie Goreng Spesial 85g',3100)">
+                            <div class="product-stock">Stok: 120</div>
+                            <div class="product-img">🍜</div>
+                            <div class="product-sku">89686010</div>
+                            <div class="product-name">Indomie Goreng Spesial 85g</div>
+                            <div class="product-price">Rp 3.100</div>
+                        </div>
+                        <div class="product-card" data-cat="minuman" onclick="addToCart('89927611','Aqua Air Mineral Botol 600ml',3500)">
+                            <div class="product-stock">Stok: 45</div>
+                            <div class="product-img">💧</div>
+                            <div class="product-sku">89927611</div>
+                            <div class="product-name">Aqua Air Mineral Botol 600ml</div>
+                            <div class="product-price">Rp 3.500</div>
+                        </div>
+                        <div class="product-card" data-cat="snack" onclick="addToCart('89912345','Chitato Sapi Panggang 68g',11500)">
+                            <div class="product-stock">Stok: 24</div>
+                            <div class="product-img">🥔</div>
+                            <div class="product-sku">89912345</div>
+                            <div class="product-name">Chitato Sapi Panggang 68g</div>
+                            <div class="product-price">Rp 11.500</div>
+                        </div>
+                        <div class="product-card" data-cat="harian" onclick="addToCart('89988776','Bimoli Minyak Goreng Pouch 2L',38500)">
+                            <div class="product-stock">Stok: 12</div>
+                            <div class="product-img">🛢️</div>
+                            <div class="product-sku">89988776</div>
+                            <div class="product-name">Bimoli Minyak Goreng Pouch 2L</div>
+                            <div class="product-price">Rp 38.500</div>
+                        </div>
+                        <div class="product-card" data-cat="sembako" onclick="addToCart('89955443','Beras Maknyuss Premium 5Kg',72000)">
+                            <div class="product-stock">Stok: 15</div>
+                            <div class="product-img">🍚</div>
+                            <div class="product-sku">89955443</div>
+                            <div class="product-name">Beras Maknyuss Premium 5Kg</div>
+                            <div class="product-price">Rp 72.000</div>
+                        </div>
+                        <div class="product-card" data-cat="minuman" onclick="addToCart('89944332','Susu Ultra Full Cream 1L',18500)">
+                            <div class="product-stock">Stok: 30</div>
+                            <div class="product-img">🥛</div>
+                            <div class="product-sku">89944332</div>
+                            <div class="product-name">Susu Ultra Full Cream 1L</div>
+                            <div class="product-price">Rp 18.500</div>
+                        </div>
+                        <div class="product-card" data-cat="harian" onclick="addToCart('89922110','Pepsodent Pencegah Gigi Berlubang 190g',14500)">
+                            <div class="product-stock">Stok: 50</div>
+                            <div class="product-img">🪥</div>
+                            <div class="product-sku">89922110</div>
+                            <div class="product-name">Pepsodent Pencegah Gigi Berlubang 190g</div>
+                            <div class="product-price">Rp 14.500</div>
+                        </div>
+                        <div class="product-card" data-cat="sembako" onclick="addToCart('89999887','Kopi Kapal Api Special Mix 10s',13000)">
+                            <div class="product-stock">Stok: 18</div>
+                            <div class="product-img">☕</div>
+                            <div class="product-sku">89999887</div>
+                            <div class="product-name">Kopi Kapal Api Special Mix 10s</div>
+                            <div class="product-price">Rp 13.000</div>
+                        </div>
+                    </div>
+                    <div id="productEmptyState" style="display:none; text-align:center; padding:40px 20px; color:var(--text-muted);">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:10px; opacity:0.5;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <div style="font-size:14px; font-weight:600;">Produk tidak ditemukan</div>
+                        <div style="font-size:12px; margin-top:2px;">Coba kata kunci atau kategori lain</div>
+                    </div>
+                </div>
+
+                <!-- Right: Cart Area -->
+                <div class="pos-cart-area">
+                    <div class="cart-header">
+                        <span style="font-weight: 800; font-size: 16px;">Keranjang Transaksi</span>
+                        <button class="btn btn-outline btn-sm" style="color:var(--danger); border-color:var(--danger);" onclick="clearCart()">Kosongkan</button>
+                    </div>
+                    
+                    <!-- Customer Tag -->
+                    <div class="customer-tag">
+                        <div>
+                            <span style="color: var(--text-muted); display: block; font-size: 11px; margin-bottom:2px;">Pelanggan:</span>
+                            <strong id="customerName">Umum / Non-Member</strong>
+                        </div>
+                        <button class="customer-tag-btn" onclick="openModal('modalMember')">+ Pilih Member</button>
+                    </div>
+
+                    <div class="cart-items" id="cartItems">
+                        <!-- rendered by JS -->
+                    </div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row"><span id="subtotalLabel">Subtotal (0 item)</span><span id="subtotalValue">Rp 0</span></div>
+                        <div class="summary-row"><span>Diskon Member</span><span id="discountValue" style="color: var(--danger);">- Rp 0</span></div>
+                        <div class="summary-row"><span>PPN (11%)</span><span id="taxValue">Rp 0</span></div>
+                        <div class="summary-row total"><span>Total Bayar</span><span class="text-primary" id="totalValue">Rp 0</span></div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-outline" style="grid-column: 1;" onclick="holdTransaction()">Simpan (Hold)</button>
+                            <button class="btn btn-outline" style="grid-column: 2;" onclick="manualDiscount()">Diskon Manual</button>
+                            <button class="btn-pay" onclick="openCheckoutModal()">BAYAR SEKARANG (F9)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal (Improved with Quick Cash) -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Pembayaran Transaksi</span>
+                <button style="background:none; border:none; cursor:pointer; font-size:18px;" onclick="closeCheckoutModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 20px; padding: 15px; background: var(--bg-main); border-radius: var(--radius-md);">
+                    <div style="font-size: 13px; color: var(--text-muted); font-weight:700; text-transform:uppercase;">Total Tagihan</div>
+                    <div style="font-size: 32px; font-weight: 800; color: var(--primary);" id="modalTotal">Rp 0</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Pilih Metode Pembayaran</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;" id="payMethods">
+                        <button type="button" class="btn btn-primary" style="padding:10px;" onclick="selectPayMethod(this,'Tunai')">Tunai</button>
+                        <button type="button" class="btn btn-outline" style="padding:10px;" onclick="selectPayMethod(this,'QRIS')">QRIS</button>
+                        <button type="button" class="btn btn-outline" style="padding:10px;" onclick="selectPayMethod(this,'Debit/Kredit')">Debit/Kredit</button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="cashGroup">
+                    <label>Uang Diterima (Rp)</label>
+                    <!-- Quick Cash Buttons -->
+                    <div class="quick-cash-grid">
+                        <button class="quick-cash-btn" onclick="setCashExact()">Uang Pas</button>
+                        <button class="quick-cash-btn" onclick="setCash(70000)">70k</button>
+                        <button class="quick-cash-btn" onclick="setCash(100000)">100k</button>
+                        <button class="quick-cash-btn" onclick="setCash(150000)">150k</button>
+                    </div>
+                    <input type="number" class="form-control" value="0" id="cashInput" style="font-size: 20px; font-weight: 800; text-align:right;" oninput="updateChange()">
+                </div>
+
+                <div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; padding: 15px; border-radius: var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size: 14px; font-weight:700; color: #065f46;">KEMBALIAN:</span>
+                    <strong style="font-size: 24px; font-weight:800; color: var(--success);" id="changeText">Rp 0</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeCheckoutModal()">Batal (Esc)</button>
+                <button class="btn btn-success" style="padding: 10px 20px; font-size:14px;" onclick="finishTransaction()">Selesai & Cetak Struk (Enter)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Picker Modal -->
+    <div class="modal-overlay" id="modalMember">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Pilih Member</span>
+                <a href="#" onclick="event.preventDefault(); closeModal('modalMember')" style="color:var(--text-muted); font-size:20px; line-height:1;">&times;</a>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><input type="text" class="form-control" placeholder="Cari nama / no. HP member..." oninput="demoFilterTable(this,'memberList')"></div>
+                <table style="width:100%;">
+                    <tbody id="memberList">
+                        <tr><td><strong>Sari Wulandari</strong><br><span style="font-size:11px; color:var(--text-muted);">0812-1122-3344 &middot; 245 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Sari Wulandari')">Pilih</button></td></tr>
+                        <tr><td><strong>Budi Santoso</strong><br><span style="font-size:11px; color:var(--text-muted);">0813-4455-6677 &middot; 187 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Budi Santoso')">Pilih</button></td></tr>
+                        <tr><td><strong>Dewi Anggraini</strong><br><span style="font-size:11px; color:var(--text-muted);">0821-7788-9900 &middot; 312 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Dewi Anggraini')">Pilih</button></td></tr>
+                        <tr><td><strong>Ahmad Fauzi</strong><br><span style="font-size:11px; color:var(--text-muted);">0857-2233-4455 &middot; 98 poin</span></td><td style="text-align:right;"><button class="btn btn-outline btn-sm" onclick="selectMember('Ahmad Fauzi')">Pilih</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="selectMember(null)">Umum / Non-Member</button>
+            </div>
+        </div>
+    </div>
+
+    
+<script src="js/demo.js"></script>
+<script>
+    /* ---------- Cart state ---------- */
+    var cart = [
+        { sku: '89686010', name: 'Indomie Goreng Spesial 85g', price: 3100, qty: 5 },
+        { sku: '89927611', name: 'Aqua Air Mineral Botol 600ml', price: 3500, qty: 2 },
+        { sku: '89988776', name: 'Bimoli Minyak Goreng Pouch 2L', price: 38500, qty: 1 }
+    ];
+    var memberDiscountPct = 0;
+    var selectedPayMethod = 'Tunai';
+
+    function formatRp(n) {
+        return 'Rp ' + Math.round(n).toLocaleString('id-ID');
+    }
+
+    function renderCart() {
+        var container = document.getElementById('cartItems');
+        container.innerHTML = '';
+        var totalItems = 0, subtotal = 0;
+        cart.forEach(function (item, idx) {
+            totalItems += item.qty;
+            subtotal += item.qty * item.price;
+            var div = document.createElement('div');
+            div.className = 'cart-item';
+            div.innerHTML =
+                '<div class="cart-item-info">' +
+                    '<div class="cart-item-name">' + item.name + '</div>' +
+                    '<div class="cart-item-sku">SKU: ' + item.sku + '</div>' +
+                    '<div class="cart-item-price">' + formatRp(item.price) + ' x ' + item.qty + '</div>' +
+                '</div>' +
+                '<div class="cart-qty-ctrl">' +
+                    '<button class="qty-btn" onclick="changeQty(' + idx + ',-1)">-</button>' +
+                    '<div class="qty-val">' + item.qty + '</div>' +
+                    '<button class="qty-btn" onclick="changeQty(' + idx + ',1)">+</button>' +
+                '</div>';
+            container.appendChild(div);
+        });
+        if (cart.length === 0) {
+            container.innerHTML = '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:30px 0;">Keranjang masih kosong.<br>Klik produk di sebelah kiri untuk menambahkan.</div>';
+        }
+
+        var discount = subtotal * memberDiscountPct;
+        var afterDiscount = subtotal - discount;
+        var tax = afterDiscount * 0.11;
+        var total = afterDiscount + tax;
+
+        document.getElementById('subtotalLabel').textContent = 'Subtotal (' + totalItems + ' item)';
+        document.getElementById('subtotalValue').textContent = formatRp(subtotal);
+        document.getElementById('discountValue').textContent = '- ' + formatRp(discount);
+        document.getElementById('taxValue').textContent = formatRp(tax);
+        document.getElementById('totalValue').textContent = formatRp(total);
+        var modalTotalEl = document.getElementById('modalTotal');
+        if (modalTotalEl) modalTotalEl.textContent = formatRp(total);
+        updateChange();
+    }
+
+    function cartTotal() {
+        var subtotal = cart.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
+        var discount = subtotal * memberDiscountPct;
+        var afterDiscount = subtotal - discount;
+        return afterDiscount + afterDiscount * 0.11;
+    }
+
+    function addToCart(sku, name, price) {
+        var existing = cart.find(function (i) { return i.sku === sku; });
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cart.push({ sku: sku, name: name, price: price, qty: 1 });
+        }
+        renderCart();
+        showToast(name + ' ditambahkan ke keranjang.', 'success');
+    }
+
+    function changeQty(idx, delta) {
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+        renderCart();
+    }
+
+    function clearCart() {
+        if (cart.length === 0) return;
+        if (!confirm('Kosongkan seluruh keranjang transaksi ini?')) return;
+        cart = [];
+        renderCart();
+        showToast('Keranjang dikosongkan.', 'danger');
+    }
+
+    function holdTransaction() {
+        if (cart.length === 0) { showToast('Keranjang masih kosong.', 'warning'); return; }
+        showToast('Transaksi disimpan sementara (Hold). Bisa dilanjutkan nanti (demo).', 'info');
+    }
+
+    function manualDiscount() {
+        var val = prompt('Masukkan diskon manual (%) untuk transaksi ini:', '0');
+        if (val === null) return;
+        var pct = parseFloat(val);
+        if (isNaN(pct) || pct < 0) { showToast('Nilai diskon tidak valid.', 'danger'); return; }
+        memberDiscountPct = pct / 100;
+        renderCart();
+        showToast('Diskon manual ' + pct + '% diterapkan.', 'success');
+    }
+
+    function selectMember(name) {
+        if (name) {
+            document.getElementById('customerName').textContent = name;
+            memberDiscountPct = 0.05;
+            showToast(name + ' dipilih sebagai member. Diskon 5% diterapkan.', 'success');
+        } else {
+            document.getElementById('customerName').textContent = 'Umum / Non-Member';
+            memberDiscountPct = 0;
+            showToast('Kembali ke pelanggan umum.', 'info');
+        }
+        closeModal('modalMember');
+        renderCart();
+    }
+
+    var currentCategory = 'all';
+
+    function filterCategory(btn, cat) {
+        currentCategory = cat;
+        document.querySelectorAll('#catBar .cat-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        applyProductFilters();
+    }
+
+    /* Live search — runs on every keystroke (oninput), combined with the
+       active category filter. This is what makes typing in the search box
+       actually narrow down the product grid in real time. */
+    function applyProductFilters() {
+        var q = document.getElementById('scanInput').value.trim().toLowerCase();
+        var anyVisible = false;
+        document.querySelectorAll('#productGrid .product-card').forEach(function (card) {
+            var cat = card.getAttribute('data-cat');
+            var name = card.querySelector('.product-name').textContent.toLowerCase();
+            var sku = card.querySelector('.product-sku').textContent.toLowerCase();
+            var matchesCat = (currentCategory === 'all' || cat === currentCategory);
+            var matchesQuery = (!q || name.indexOf(q) !== -1 || sku.indexOf(q) !== -1);
+            var visible = matchesCat && matchesQuery;
+            card.style.display = visible ? '' : 'none';
+            if (visible) anyVisible = true;
+        });
+        var emptyState = document.getElementById('productEmptyState');
+        if (emptyState) emptyState.style.display = anyVisible ? 'none' : 'block';
+    }
+
+    /* Enter key / "Cari" button — like a barcode scanner: adds the first
+       currently-visible match straight to the cart and clears the box. */
+    function handleScan() {
+        var input = document.getElementById('scanInput');
+        var visibleCards = Array.prototype.filter.call(
+            document.querySelectorAll('#productGrid .product-card'),
+            function (c) { return c.style.display !== 'none'; }
+        );
+        if (visibleCards.length === 0) {
+            showToast('Produk "' + input.value + '" tidak ditemukan.', 'danger');
+            return;
+        }
+        visibleCards[0].click();
+        input.value = '';
+        applyProductFilters();
+    }
+
+    /* ---------- Checkout modal ---------- */
+    function openCheckoutModal() {
+        if (cart.length === 0) { showToast('Keranjang masih kosong.', 'warning'); return; }
+        document.getElementById('cashInput').value = Math.ceil(cartTotal() / 1000) * 1000;
+        openModal('checkoutModal');
+        renderCart();
+    }
+    function closeCheckoutModal() { closeModal('checkoutModal'); }
+
+    function selectPayMethod(btn, label) {
+        selectedPayMethod = label;
+        document.querySelectorAll('#payMethods button').forEach(function (b) {
+            b.classList.remove('btn-primary'); b.classList.add('btn-outline');
+        });
+        btn.classList.remove('btn-outline'); btn.classList.add('btn-primary');
+        var cashGroup = document.getElementById('cashGroup');
+        cashGroup.style.display = (label === 'Tunai') ? '' : 'none';
+        updateChange();
+    }
+
+    function setCash(amount) {
+        document.getElementById('cashInput').value = amount;
+        updateChange();
+    }
+    function setCashExact() {
+        document.getElementById('cashInput').value = Math.round(cartTotal());
+        updateChange();
+    }
+    function updateChange() {
+        var cash = parseFloat(document.getElementById('cashInput').value) || 0;
+        var change = selectedPayMethod === 'Tunai' ? (cash - cartTotal()) : 0;
+        document.getElementById('changeText').textContent = formatRp(Math.max(change, 0));
+        document.getElementById('changeText').style.color = change < 0 ? 'var(--danger)' : 'var(--success)';
+    }
+
+    function finishTransaction() {
+        if (selectedPayMethod === 'Tunai') {
+            var cash = parseFloat(document.getElementById('cashInput').value) || 0;
+            if (cash < cartTotal()) {
+                showToast('Uang diterima kurang dari total tagihan.', 'danger');
+                return;
+            }
+        }
+        closeCheckoutModal();
+        showToast('Transaksi berhasil! Struk sedang dicetak (demo).', 'success');
+        cart = [];
+        memberDiscountPct = 0;
+        document.getElementById('customerName').textContent = 'Umum / Non-Member';
+        renderCart();
+    }
+
+    /* ---------- init ---------- */
+    renderCart();
+</script>
+
+</body>
+</html>

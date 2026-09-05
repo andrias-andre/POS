@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Riwayat Penjualan - Minimarket ERP</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">M</div>
+            <div class="brand-text">
+                <div class="brand-title">MiniMart ERP</div>
+                <div style="font-size: 10px; color: #94a3b8;">Retail Management System</div>
+            </div>
+            <button type="button" class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Ciutkan/Perluas Menu" aria-label="Ciutkan atau perluas menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+        </div>
+        <div class="app-switcher">
+            <a href="index.html" class="switch-btn active">ERP Backoffice</a>
+            <a href="pos.html" class="switch-btn">POS Kasir</a>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-search">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="navSearchInput" placeholder="Cari menu..." autocomplete="off" oninput="filterNavMenu(this)" onkeydown="navSearchEnter(event,this)">
+                <button type="button" class="clear-btn" onclick="clearNavSearch(this)" aria-label="Bersihkan pencarian">&times;</button>
+            </div>
+            <div class="nav-section">Modul Utama</div>
+            <a href="index.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard ERP</span></a>
+            <div class="nav-section">Data Master</div>
+            <div class="dropdown">
+                <a href="#" class="nav-item dropdown-toggle " onclick="toggleSubMenu(event, 'masterSubMenu')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <span>Master Data</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(0deg);"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="sub-menu" id="masterSubMenu" style="display: none;">
+                    <a href="products.html" class="nav-item sub-item ">Master Produk</a>
+                    <a href="barcode.html" class="nav-item sub-item ">Cetak Label Barcode</a>
+                    <a href="master_kategori.html" class="nav-item sub-item ">Master Kategori</a>
+                    <a href="master_rak.html" class="nav-item sub-item ">Master Rak</a>
+                    <a href="master_supplier.html" class="nav-item sub-item ">Master Supplier</a>
+                    <a href="master_pelanggan.html" class="nav-item sub-item ">Master Pelanggan</a>
+                    <a href="master_karyawan.html" class="nav-item sub-item ">Master Karyawan</a>
+                    <a href="master_promo.html" class="nav-item sub-item ">Master Promo & Diskon</a>
+                </div>
+            </div>
+            <a href="sales.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span>Riwayat Penjualan</span></a>
+            <a href="retur_penjualan.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span>Retur Penjualan</span></a>
+            <a href="purchases.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Pembelian (PO)</span></a>
+            <a href="retur_pembelian.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Retur Pembelian</span></a>
+            <a href="inventory.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Manajemen Stok</span></a>
+            <a href="expenses.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>Biaya Ops. & Kas</span></a>
+            <a href="accounting.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buku Besar</span></a>
+            <div class="nav-section">Laporan & Analitik</div>
+            <div class="dropdown">
+                <a href="#" class="nav-item dropdown-toggle " onclick="toggleSubMenu(event, 'reportSubMenu')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>Laporan (Report)</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(0deg);"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="sub-menu" id="reportSubMenu" style="display: none;">
+                    <a href="report_penjualan.html" class="nav-item sub-item ">Laporan Penjualan</a>
+                    <a href="report_labarugi.html" class="nav-item sub-item ">Laporan Laba Rugi</a>
+                    <a href="report_stok.html" class="nav-item sub-item ">Laporan Stok & Persediaan</a>
+                    <a href="report_slowmoving.html" class="nav-item sub-item ">Laporan Produk Slow Moving</a>
+                    <a href="report_pembelian.html" class="nav-item sub-item ">Laporan Pembelian</a>
+                    <a href="report_kas.html" class="nav-item sub-item ">Laporan Kas & Keuangan</a>
+                </div>
+            </div>
+            <a href="activity_log.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Log Aktivitas</span></a>
+            <a href="settings.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Pengaturan Toko</span></a>
+            <div class="nav-empty-state">Menu tidak ditemukan.<br>Coba kata kunci lain.</div>
+        </div>
+        <div class="user-profile-sidebar">
+            <div class="avatar">AD</div>
+            <div class="user-info">
+                <div class="user-name">Administrator</div>
+                <div class="user-role">Manager</div>
+            </div>
+            <a href="login.html" title="Keluar" style="color: #94a3b8; margin-left: auto;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+    <header>
+        <div class="header-title"><h1>Riwayat Penjualan</h1></div>
+        <div class="header-actions">
+            <a href="pos.html" class="btn btn-primary btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg> Buka Kasir (POS)</a>
+        </div>
+    </header>
+
+        <div class="page-container">
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Riwayat Transaksi Penjualan</span>
+                    <a href="pos.html" class="btn btn-primary btn-sm">+ Transaksi Baru (POS)</a>
+                </div>
+                <div class="card-body" style="padding: 16px 20px 0;">
+                    <div class="search-box" style="width:280px; margin-bottom:14px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" placeholder="Cari no. struk..." oninput="demoFilterTable(this, 'tblSales')">
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0;">
+                    <table style="width:100%;">
+                        <thead><tr><th>No. Struk</th><th>Waktu</th><th>Kasir</th><th>Metode</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="tblSales">
+                            <tr><td><strong>#STR-9912</strong></td><td>02 Sep, 14:32 WIB</td><td>Andi Prasetyo</td><td>Tunai</td><td>Rp 67.710</td><td><span class="badge badge-success">Lunas</span></td><td>
+                                <button class="btn btn-outline btn-sm" data-values="STR-9912|02 Sep 2026, 14:32 WIB|Andi Prasetyo|Tunai|Rp 67.710|Indomie Goreng 85g x2, Aqua 600ml x1" onclick="openReceiptModal(this)">Lihat</button>
+                            </td></tr>
+                            <tr><td><strong>#STR-9911</strong></td><td>02 Sep, 14:28 WIB</td><td>Putri Amelia</td><td>QRIS GoPay</td><td>Rp 125.000</td><td><span class="badge badge-success">Lunas</span></td><td>
+                                <button class="btn btn-outline btn-sm" data-values="STR-9911|02 Sep 2026, 14:28 WIB|Putri Amelia|QRIS GoPay|Rp 125.000|Rinso Anti Noda 800g x2, Chitato 68g x3" onclick="openReceiptModal(this)">Lihat</button>
+                            </td></tr>
+                            <tr><td><strong>#STR-9910</strong></td><td>02 Sep, 14:15 WIB</td><td>Andi Prasetyo</td><td>Debit BCA</td><td>Rp 450.500</td><td><span class="badge badge-success">Lunas</span></td><td>
+                                <button class="btn btn-outline btn-sm" data-values="STR-9910|02 Sep 2026, 14:15 WIB|Andi Prasetyo|Debit BCA|Rp 450.500|Belanja campuran 14 item" onclick="openReceiptModal(this)">Lihat</button>
+                            </td></tr>
+                            <tr><td><strong>#STR-9909</strong></td><td>01 Sep, 20:47 WIB</td><td>Putri Amelia</td><td>Tunai</td><td>Rp 23.400</td><td><span class="badge badge-success">Lunas</span></td><td>
+                                <button class="btn btn-outline btn-sm" data-values="STR-9909|01 Sep 2026, 20:47 WIB|Putri Amelia|Tunai|Rp 23.400|Sariroti Tawar Spesial x1, Aqua 600ml x1" onclick="openReceiptModal(this)">Lihat</button>
+                            </td></tr>
+                            <tr><td><strong>#STR-9908</strong></td><td>01 Sep, 19:03 WIB</td><td>Andi Prasetyo</td><td>QRIS OVO</td><td>Rp 98.200</td><td><span class="badge badge-danger">Dibatalkan</span></td><td>
+                                <button class="btn btn-outline btn-sm" data-values="STR-9908|01 Sep 2026, 19:03 WIB|Andi Prasetyo|QRIS OVO|Rp 98.200 (Dibatalkan)|Transaksi dibatalkan pelanggan" onclick="openReceiptModal(this)">Lihat</button>
+                            </td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="modal-overlay" id="modalReceipt">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Detail Struk <span id="rcNo"></span></span>
+            <a href="#" onclick="event.preventDefault(); closeModal('modalReceipt')" style="color:var(--text-muted); font-size:20px; line-height:1;">&times;</a>
+        </div>
+        <div class="modal-body">
+            <div class="summary-row"><span>Waktu</span><span id="rcWaktu"></span></div>
+            <div class="summary-row"><span>Kasir</span><span id="rcKasir"></span></div>
+            <div class="summary-row"><span>Metode Bayar</span><span id="rcMetode"></span></div>
+            <div class="summary-row"><span>Item</span><span id="rcItem" style="text-align:right; max-width:60%;"></span></div>
+            <div class="summary-row total"><span>Total</span><span id="rcTotal"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" onclick="closeModal('modalReceipt')">Tutup</button>
+            <button type="button" class="btn btn-primary" onclick="demoAction('Struk sedang dicetak ulang (demo).')">Cetak Ulang</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/demo.js"></script>
+
+<script>
+    function openReceiptModal(btn) {
+        var v = (btn.getAttribute('data-values') || '').split('|');
+        document.getElementById('rcNo').textContent = v[0] || '';
+        document.getElementById('rcWaktu').textContent = v[1] || '';
+        document.getElementById('rcKasir').textContent = v[2] || '';
+        document.getElementById('rcMetode').textContent = v[3] || '';
+        document.getElementById('rcTotal').textContent = v[4] || '';
+        document.getElementById('rcItem').textContent = v[5] || '';
+        openModal('modalReceipt');
+    }
+</script>
+
+</body>
+</html>

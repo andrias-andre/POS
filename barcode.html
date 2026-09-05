@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cetak Label Barcode - Minimarket ERP</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">M</div>
+            <div class="brand-text">
+                <div class="brand-title">MiniMart ERP</div>
+                <div style="font-size: 10px; color: #94a3b8;">Retail Management System</div>
+            </div>
+            <button type="button" class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Ciutkan/Perluas Menu" aria-label="Ciutkan atau perluas menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+        </div>
+        <div class="app-switcher">
+            <a href="index.html" class="switch-btn active">ERP Backoffice</a>
+            <a href="pos.html" class="switch-btn">POS Kasir</a>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-search">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="navSearchInput" placeholder="Cari menu..." autocomplete="off" oninput="filterNavMenu(this)" onkeydown="navSearchEnter(event,this)">
+                <button type="button" class="clear-btn" onclick="clearNavSearch(this)" aria-label="Bersihkan pencarian">&times;</button>
+            </div>
+            <div class="nav-section">Modul Utama</div>
+            <a href="index.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard ERP</span></a>
+            <div class="nav-section">Data Master</div>
+            <div class="dropdown">
+                <a href="#" class="nav-item dropdown-toggle active" onclick="toggleSubMenu(event, 'masterSubMenu')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <span>Master Data</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(180deg);"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="sub-menu" id="masterSubMenu" style="display: block;">
+                    <a href="products.html" class="nav-item sub-item ">Master Produk</a>
+                    <a href="barcode.html" class="nav-item sub-item active">Cetak Label Barcode</a>
+                    <a href="master_kategori.html" class="nav-item sub-item ">Master Kategori</a>
+                    <a href="master_rak.html" class="nav-item sub-item ">Master Rak</a>
+                    <a href="master_supplier.html" class="nav-item sub-item ">Master Supplier</a>
+                    <a href="master_pelanggan.html" class="nav-item sub-item ">Master Pelanggan</a>
+                    <a href="master_karyawan.html" class="nav-item sub-item ">Master Karyawan</a>
+                    <a href="master_promo.html" class="nav-item sub-item ">Master Promo & Diskon</a>
+                </div>
+            </div>
+            <a href="sales.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span>Riwayat Penjualan</span></a>
+            <a href="retur_penjualan.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span>Retur Penjualan</span></a>
+            <a href="purchases.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Pembelian (PO)</span></a>
+            <a href="retur_pembelian.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Retur Pembelian</span></a>
+            <a href="inventory.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Manajemen Stok</span></a>
+            <a href="expenses.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>Biaya Ops. & Kas</span></a>
+            <a href="accounting.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buku Besar</span></a>
+            <div class="nav-section">Laporan & Analitik</div>
+            <div class="dropdown">
+                <a href="#" class="nav-item dropdown-toggle " onclick="toggleSubMenu(event, 'reportSubMenu')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>Laporan (Report)</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto; width:16px; height:16px; transition: transform 0.3s; transform: rotate(0deg);"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="sub-menu" id="reportSubMenu" style="display: none;">
+                    <a href="report_penjualan.html" class="nav-item sub-item ">Laporan Penjualan</a>
+                    <a href="report_labarugi.html" class="nav-item sub-item ">Laporan Laba Rugi</a>
+                    <a href="report_stok.html" class="nav-item sub-item ">Laporan Stok & Persediaan</a>
+                    <a href="report_slowmoving.html" class="nav-item sub-item ">Laporan Produk Slow Moving</a>
+                    <a href="report_pembelian.html" class="nav-item sub-item ">Laporan Pembelian</a>
+                    <a href="report_kas.html" class="nav-item sub-item ">Laporan Kas & Keuangan</a>
+                </div>
+            </div>
+            <a href="activity_log.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Log Aktivitas</span></a>
+            <a href="settings.html" class="nav-item "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Pengaturan Toko</span></a>
+            <div class="nav-empty-state">Menu tidak ditemukan.<br>Coba kata kunci lain.</div>
+        </div>
+        <div class="user-profile-sidebar">
+            <div class="avatar">AD</div>
+            <div class="user-info">
+                <div class="user-name">Administrator</div>
+                <div class="user-role">Manager</div>
+            </div>
+            <a href="login.html" title="Keluar" style="color: #94a3b8; margin-left: auto;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+    <header>
+        <div class="header-title"><h1>Cetak Label Barcode</h1></div>
+        <div class="header-actions">
+            <a href="products.html" class="btn btn-outline btn-sm">&larr; Kembali ke Master Produk</a>
+        </div>
+    </header>
+
+        <div class="page-container">
+
+            <div class="grid-2">
+                <!-- Product picker -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Pilih Produk dari Katalog</span>
+                    </div>
+                    <div class="card-body" style="padding: 16px 20px 0;">
+                        <div class="search-box" style="width:100%; margin-bottom:6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" id="pickerSearch" placeholder="Cari nama produk / SKU..." oninput="renderPicker()">
+                        </div>
+                    </div>
+                    <div class="card-body" id="pickerList" style="max-height:420px; overflow-y:auto;">
+                        <!-- rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Print queue -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Antrian Cetak (<span id="queueCount">0</span> produk &middot; <span id="queueTotalLabel">0</span> label)</span>
+                        <a href="#" class="btn btn-outline btn-sm" onclick="event.preventDefault(); clearQueue()">Kosongkan</a>
+                    </div>
+                    <div class="card-body" id="queueList" style="max-height:300px; overflow-y:auto;">
+                        <div id="queueEmptyState" style="text-align:center; padding:30px 10px; color:var(--text-muted); font-size:13px;">
+                            Belum ada produk dipilih.<br>Klik "+ Tambah" pada daftar produk di sebelah kiri.
+                        </div>
+                    </div>
+                    <div class="card-body" style="border-top:1px solid var(--border-color); padding-top:16px;">
+                        <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Ukuran Label</label>
+                        <div class="label-size-tabs">
+                            <div class="label-size-tab active" onclick="setLabelSize(this,'small')">Kecil (25x15mm)</div>
+                            <div class="label-size-tab" onclick="setLabelSize(this,'medium')">Sedang (40x25mm)</div>
+                            <div class="label-size-tab" onclick="setLabelSize(this,'large')">Besar (50x30mm)</div>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%; padding:12px;" onclick="printLabels()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:-3px; margin-right:4px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                            Cetak Semua Label
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live label preview -->
+            <div class="card" id="labelPreviewCard" style="display:none;">
+                <div class="card-header">
+                    <span class="card-title">Pratinjau Lembar Label</span>
+                    <span style="font-size:12px; color:var(--text-muted);">Barcode dibuat otomatis dari SKU produk (format CODE128)</span>
+                </div>
+                <div class="card-body">
+                    <div class="label-preview-grid" id="printableLabelSheet"></div>
+                </div>
+            </div>
+
+            <!-- Manual / ad-hoc barcode generator -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Generate Barcode Manual</span>
+                    <span style="font-size:12px; color:var(--text-muted);">Untuk kode di luar katalog produk (mis. voucher, kode promo)</span>
+                </div>
+                <div class="card-body">
+                    <div class="grid-2" style="align-items:start;">
+                        <div>
+                            <div class="form-group">
+                                <label>Kode / Teks</label>
+                                <input type="text" id="manualCodeInput" class="form-control" placeholder="cth: PROMO-SEP26 atau 8991234567890" oninput="renderManualBarcode()">
+                            </div>
+                            <div class="form-group">
+                                <label>Label di Bawah Barcode</label>
+                                <input type="text" id="manualLabelInput" class="form-control" placeholder="cth: Voucher Diskon 10%" oninput="renderManualBarcode()">
+                            </div>
+                            <button class="btn btn-outline" onclick="addManualToQueue()">+ Tambahkan ke Antrian Cetak</button>
+                        </div>
+                        <div class="manual-barcode-preview" id="manualPreview">
+                            <div class="manual-barcode-empty">Ketik kode di sebelah kiri untuk melihat pratinjau barcode.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+<script src="js/demo.js"></script>
+<script>
+    /* ---------- Product catalog (mirrors Master Produk / POS demo data) ---------- */
+    var PRODUCTS = [
+        { sku: '89686010', name: 'Indomie Goreng Spesial 85g', price: 'Rp 3.100' },
+        { sku: '89927611', name: 'Aqua Air Mineral Botol 600ml', price: 'Rp 3.500' },
+        { sku: '89912345', name: 'Chitato Sapi Panggang 68g', price: 'Rp 11.500' },
+        { sku: '89988776', name: 'Bimoli Minyak Goreng Pouch 2L', price: 'Rp 38.500' },
+        { sku: '89955443', name: 'Beras Maknyuss Premium 5Kg', price: 'Rp 72.000' },
+        { sku: '89944332', name: 'Susu Ultra Full Cream 1L', price: 'Rp 18.500' },
+        { sku: '89922110', name: 'Pepsodent Pencegah Gigi Berlubang 190g', price: 'Rp 14.500' },
+        { sku: '89999887', name: 'Kopi Kapal Api Special Mix 10s', price: 'Rp 13.000' },
+        { sku: '89945210', name: 'Sariroti Tawar Spesial', price: 'Rp 14.500' },
+        { sku: '89933012', name: 'Rinso Anti Noda 800g', price: 'Rp 19.900' }
+    ];
+
+    var printQueue = [];   // { sku, name, price, qty }
+    var manualQueue = [];  // { code, label, qty } — ad-hoc entries, keyed separately from SKU
+    var labelSize = 'small';
+    var labelDims = { small: { w: 55, h: 30, bw: 1.3, bh: 32 }, medium: { w: 85, h: 55, bw: 1.7, bh: 45 }, large: { w: 105, h: 68, bw: 2.1, bh: 55 } };
+
+    function formatSearch(s) { return s.toLowerCase(); }
+
+    /* ---------- Product picker (left panel) ---------- */
+    function renderPicker() {
+        var q = formatSearch(document.getElementById('pickerSearch').value.trim());
+        var list = document.getElementById('pickerList');
+        list.innerHTML = '';
+        var results = PRODUCTS.filter(function (p) {
+            return !q || p.name.toLowerCase().indexOf(q) !== -1 || p.sku.indexOf(q) !== -1;
+        });
+        if (results.length === 0) {
+            list.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:13px;">Produk tidak ditemukan.</div>';
+            return;
+        }
+        results.forEach(function (p) {
+            var row = document.createElement('div');
+            row.className = 'picker-row';
+            row.innerHTML =
+                '<div class="picker-info">' +
+                    '<div class="picker-name">' + p.name + '</div>' +
+                    '<div class="picker-sub">' + p.sku + ' &middot; ' + p.price + '</div>' +
+                '</div>' +
+                '<button type="button" class="btn btn-outline btn-sm" onclick="addToQueue(\'' + p.sku + '\')">+ Tambah</button>';
+            list.appendChild(row);
+        });
+    }
+
+    /* ---------- Print queue (right panel) ---------- */
+    function addToQueue(sku) {
+        var product = PRODUCTS.find(function (p) { return p.sku === sku; });
+        if (!product) return;
+        var existing = printQueue.find(function (i) { return i.sku === sku; });
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            printQueue.push({ sku: product.sku, name: product.name, price: product.price, qty: 1 });
+        }
+        renderQueue();
+        showToast(product.name + ' ditambahkan ke antrian cetak.', 'success');
+    }
+
+    function updateQueueQty(idx, val) {
+        var qty = parseInt(val, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        printQueue[idx].qty = qty;
+        renderQueue();
+    }
+
+    function removeFromQueue(idx) {
+        printQueue.splice(idx, 1);
+        renderQueue();
+    }
+
+    function clearQueue() {
+        if (printQueue.length === 0 && manualQueue.length === 0) return;
+        if (!confirm('Kosongkan seluruh antrian cetak?')) return;
+        printQueue = [];
+        manualQueue = [];
+        renderQueue();
+        showToast('Antrian cetak dikosongkan.', 'danger');
+    }
+
+    function setLabelSize(tab, size) {
+        labelSize = size;
+        document.querySelectorAll('.label-size-tab').forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        renderQueue();
+    }
+
+    function renderQueue() {
+        var listEl = document.getElementById('queueList');
+        var emptyEl = document.getElementById('queueEmptyState');
+        var totalItems = printQueue.length + manualQueue.length;
+        var totalLabels = 0;
+        printQueue.forEach(function (i) { totalLabels += i.qty; });
+        manualQueue.forEach(function (i) { totalLabels += i.qty; });
+
+        document.getElementById('queueCount').textContent = totalItems;
+        document.getElementById('queueTotalLabel').textContent = totalLabels;
+
+        listEl.querySelectorAll('.queue-row').forEach(function (r) { r.remove(); });
+
+        if (totalItems === 0) {
+            emptyEl.style.display = 'block';
+        } else {
+            emptyEl.style.display = 'none';
+            printQueue.forEach(function (item, idx) {
+                var row = document.createElement('div');
+                row.className = 'queue-row';
+                row.innerHTML =
+                    '<div class="queue-info">' +
+                        '<div class="queue-name">' + item.name + '</div>' +
+                        '<div class="queue-sub">' + item.sku + ' &middot; ' + item.price + '</div>' +
+                    '</div>' +
+                    '<input type="number" min="1" class="queue-qty-input" value="' + item.qty + '" onchange="updateQueueQty(' + idx + ', this.value)">' +
+                    '<button type="button" class="queue-remove-btn" onclick="removeFromQueue(' + idx + ')" title="Hapus">' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>' +
+                    '</button>';
+                listEl.appendChild(row);
+            });
+            manualQueue.forEach(function (item, idx) {
+                var row = document.createElement('div');
+                row.className = 'queue-row';
+                row.innerHTML =
+                    '<div class="queue-info">' +
+                        '<div class="queue-name">' + item.label + '</div>' +
+                        '<div class="queue-sub">' + item.code + ' &middot; Manual</div>' +
+                    '</div>' +
+                    '<input type="number" min="1" class="queue-qty-input" value="' + item.qty + '" onchange="updateManualQty(' + idx + ', this.value)">' +
+                    '<button type="button" class="queue-remove-btn" onclick="removeManualFromQueue(' + idx + ')" title="Hapus">' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>' +
+                    '</button>';
+                listEl.appendChild(row);
+            });
+        }
+
+        renderLabelSheet(totalLabels);
+    }
+
+    function updateManualQty(idx, val) {
+        var qty = parseInt(val, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        manualQueue[idx].qty = qty;
+        renderQueue();
+    }
+    function removeManualFromQueue(idx) {
+        manualQueue.splice(idx, 1);
+        renderQueue();
+    }
+
+    /* ---------- Live label sheet preview (also the printed sheet) ---------- */
+    function renderLabelSheet(totalLabels) {
+        var sheet = document.getElementById('printableLabelSheet');
+        var card = document.getElementById('labelPreviewCard');
+        sheet.innerHTML = '';
+
+        if (totalLabels === 0) {
+            card.style.display = 'none';
+            return;
+        }
+        card.style.display = 'block';
+
+        var dims = labelDims[labelSize];
+        var counter = 0;
+
+        function makeLabel(code, name, price) {
+            counter++;
+            var wrap = document.createElement('div');
+            wrap.className = 'barcode-label';
+            wrap.style.width = dims.w + 'mm';
+            var svgId = 'lbl_' + counter;
+            wrap.innerHTML =
+                '<div class="label-store">MiniMart ERP</div>' +
+                '<div class="label-name">' + name + '</div>' +
+                '<svg id="' + svgId + '"></svg>' +
+                (price ? '<div class="label-price">' + price + '</div>' : '');
+            sheet.appendChild(wrap);
+            try {
+                JsBarcode('#' + svgId, code, {
+                    format: 'CODE128', width: dims.bw, height: dims.bh,
+                    fontSize: labelSize === 'small' ? 9 : 11, margin: 2, displayValue: true
+                });
+            } catch (e) {
+                document.getElementById(svgId).outerHTML = '<div style="font-size:11px; color:var(--danger);">Kode tidak valid</div>';
+            }
+        }
+
+        printQueue.forEach(function (item) {
+            for (var i = 0; i < item.qty; i++) makeLabel(item.sku, item.name, item.price);
+        });
+        manualQueue.forEach(function (item) {
+            for (var i = 0; i < item.qty; i++) makeLabel(item.code, item.label || item.code, null);
+        });
+    }
+
+    function printLabels() {
+        var total = printQueue.reduce(function (s, i) { return s + i.qty; }, 0) + manualQueue.reduce(function (s, i) { return s + i.qty; }, 0);
+        if (total === 0) {
+            showToast('Antrian cetak masih kosong. Tambahkan produk terlebih dahulu.', 'warning');
+            return;
+        }
+        window.print();
+    }
+
+    /* ---------- Manual / ad-hoc barcode ---------- */
+    function renderManualBarcode() {
+        var code = document.getElementById('manualCodeInput').value.trim();
+        var label = document.getElementById('manualLabelInput').value.trim();
+        var preview = document.getElementById('manualPreview');
+        if (!code) {
+            preview.innerHTML = '<div class="manual-barcode-empty">Ketik kode di sebelah kiri untuk melihat pratinjau barcode.</div>';
+            return;
+        }
+        preview.innerHTML = '<svg id="manualBarcodeSvg"></svg>' + (label ? '<div style="font-size:12px; font-weight:700; margin-top:6px;">' + label + '</div>' : '');
+        try {
+            JsBarcode('#manualBarcodeSvg', code, { format: 'CODE128', width: 2, height: 55, fontSize: 13, margin: 6, displayValue: true });
+        } catch (e) {
+            preview.innerHTML = '<div style="color:var(--danger); font-size:13px;">Kode tidak valid untuk format CODE128.</div>';
+        }
+    }
+
+    function addManualToQueue() {
+        var code = document.getElementById('manualCodeInput').value.trim();
+        var label = document.getElementById('manualLabelInput').value.trim();
+        if (!code) { showToast('Isi kode terlebih dahulu.', 'warning'); return; }
+        manualQueue.push({ code: code, label: label || code, qty: 1 });
+        renderQueue();
+        showToast('Kode manual ditambahkan ke antrian cetak.', 'success');
+        document.getElementById('manualCodeInput').value = '';
+        document.getElementById('manualLabelInput').value = '';
+        renderManualBarcode();
+    }
+
+    /* ---------- Auto-add when arriving from Master Produk's "Barcode" button ---------- */
+    (function autoAddFromQuery() {
+        var params = new URLSearchParams(window.location.search);
+        var sku = params.get('add');
+        if (sku) addToQueue(sku);
+    })();
+
+    /* ---------- init ---------- */
+    renderPicker();
+    renderQueue();
+</script>
+
+</body>
+</html>

@@ -399,10 +399,8 @@
             errorBox.style.display = 'none';
             
             if (username === 'kasir1@minimarket.com' && password === 'kasir123') {
-                alert('Login Kasir berhasil. Mengalihkan ke POS...');
                 window.location.href = 'pos.html';
             } else if (username === 'admin@minimarket.com' && password === 'admin123') {
-                alert('Login Admin berhasil. Mengalihkan ke Dashboard...');
                 window.location.href = 'dashboard.html';
             } else {
                 errorBox.querySelector('span').textContent = 'Username atau kata sandi salah. Silakan coba lagi.';

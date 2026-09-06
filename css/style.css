@@ -454,17 +454,29 @@ tr:hover { background-color: #f1f5f9; }
     .sidebar { transform: translateX(-100%); width: 260px !important; }
     .sidebar.mobile-open { transform: translateX(0); box-shadow: var(--shadow-lg); }
     /* Icon-only collapse is a desktop concept; force full labels whenever the
-       off-canvas drawer is used, so mobile always shows a normal readable menu */
+       off-canvas drawer is used, so mobile always shows a normal readable menu.
+       Note: "display: initial" resolves to the CSS-wide keyword value (inline),
+       not each element's real display — for elements that aren't flex items
+       (nav-section, nav-search) that silently broke into inline, which is why
+       explicit values are used instead. */
     .sidebar.collapsed .brand-text,
-    .sidebar.collapsed .app-switcher,
     .sidebar.collapsed .nav-section,
     .sidebar.collapsed .nav-search,
     .sidebar.collapsed .nav-item span,
     .sidebar.collapsed .chevron,
-    .sidebar.collapsed .user-info { display: initial !important; }
+    .sidebar.collapsed .user-info { display: block !important; }
+    .sidebar.collapsed .app-switcher { display: flex !important; }
     .sidebar.collapsed .nav-item:not(.sub-item) { justify-content: flex-start; padding: 11px 14px; }
     .sidebar.collapsed .brand { flex-direction: row; padding: 20px; }
-    .sidebar-toggle-btn { display: none; }
+    /* The collapsed (icon-only) rail also center-aligns the profile row and
+       zeroes the logout icon's margin — reset both back to the normal
+       avatar-left / logout-icon-right layout on mobile. */
+    .sidebar.collapsed .user-profile-sidebar { justify-content: flex-start !important; }
+    .sidebar.collapsed .user-profile-sidebar a { margin-left: auto !important; }
+    /* Collapse-toggle is a desktop-only control; without !important it lost to
+       the per-page inline style="display:flex" on this button, so it kept
+       showing up inside the off-canvas drawer on tablet widths (769-992px). */
+    .sidebar-toggle-btn { display: none !important; }
     .sidebar ~ .main-content { margin-left: 0 !important; }
 
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -479,9 +491,6 @@ tr:hover { background-color: #f1f5f9; }
        screens — on desktop, tables should size naturally and never
        widen a two-column grid the way an unconditional min-width would. */
     .card-body table { min-width: 620px; }
-    .sidebar-toggle-btn {
-        display: none !important;
-    }
 }
 
 @media (max-width: 640px) {

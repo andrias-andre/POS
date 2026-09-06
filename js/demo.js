@@ -11,7 +11,7 @@ function toggleSubMenu(event, menuId) {
     var toggle = event.currentTarget;
     var chevron = toggle.querySelector('.chevron');
     var sidebar = document.querySelector('.sidebar');
-    var isCollapsed = sidebar && sidebar.classList.contains('collapsed');
+    var isCollapsed = sidebar && sidebar.classList.contains('collapsed') && window.innerWidth > 992;
 
     if (isCollapsed) {
         // Icon-only mode: show the sub-items as a floating flyout next to the icon
